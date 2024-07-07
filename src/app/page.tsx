@@ -1,4 +1,4 @@
-import { allCreditRoles } from './credit-roles'
+import { allCreditRoles } from '../lib/credit-roles'
 
 export default function Home() {
   return (
