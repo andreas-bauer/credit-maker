@@ -1,3 +1,20 @@
+export interface Credit {
+  conceptualization: boolean
+  dataCuration: boolean
+  formalAnalysis: boolean
+  funding: boolean
+  investigation: boolean
+  methodology: boolean
+  projectManagement: boolean
+  resource: boolean
+  software: boolean
+  supervision: boolean
+  validation: boolean
+  visualization: boolean
+  writing: boolean
+  writingReview: boolean
+}
+
 export interface CreditRole {
   name: string
   definition: string
