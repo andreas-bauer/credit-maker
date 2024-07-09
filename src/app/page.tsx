@@ -1,14 +1,28 @@
 'use client'
-import { allCreditRoles } from '../lib/credit-roles'
+import { allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
+import { toText } from '../lib/credit/generator-simple'
+import { CreditGenerator } from '../lib/credit/generator'
 
 export default function Home() {
   const generateCredit = (formData: FormData) => {
-    console.log(formData.get('author-name'))
+    const authorName: string =
+      formData.get('author-name')?.toString() || 'Author1'
+
+    const authorCredits: Credit[] = []
+    formData.forEach((_v, k, _) => {
+      if (isCredit(k)) {
+        authorCredits.push(k as Credit)
+      }
+    })
+
+    const genFn: CreditGenerator = toText
+
+    console.log(genFn(authorName, authorCredits))
   }
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-12'>
-      <div className='flex w-full flex-row gap-4'>
+      <div className='w-fullconst flex flex-row gap-4'>
         {/* Left side */}
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
           <div className='flex flex-wrap items-center justify-between px-4 py-5'>
@@ -54,7 +68,7 @@ export default function Home() {
                       <div className='flex h-6 items-center'>
                         <input
                           id={key}
-                          name={role.name}
+                          name={key}
                           type='checkbox'
                           aria-describedby={`${key}-description`}
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'

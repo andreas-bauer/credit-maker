@@ -1,18 +1,25 @@
-export type Credit =
-  | 'conceptualization'
-  | 'dataCuration'
-  | 'formalanAlysis'
-  | 'funding'
-  | 'investigation'
-  | 'methodology'
-  | 'projectManagement'
-  | 'resource'
-  | 'software'
-  | 'supervision'
-  | 'validation'
-  | 'visualization'
-  | 'writing'
-  | 'writingReview'
+const ALL_CREDITS = [
+  'conceptualization',
+  'dataCuration',
+  'formalanAlysis',
+  'funding',
+  'investigation',
+  'methodology',
+  'projectManagement',
+  'resource',
+  'software',
+  'supervision',
+  'validation',
+  'visualization',
+  'writing',
+  'writingReview',
+] as const
+
+export type Credit = (typeof ALL_CREDITS)[number]
+
+export function isCredit(value: string): value is Credit {
+  return ALL_CREDITS.includes(value as Credit)
+}
 
 export interface CreditRole {
   name: string
