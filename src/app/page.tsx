@@ -65,7 +65,7 @@ export default function Home() {
 
               <fieldset>
                 <legend className='sr-only'>Credit roles</legend>
-                <div className='space-y-5'>
+                <div className='space-y-3'>
                   {Object.entries(allCreditRoles).map(([key, role]) => (
                     <div key={key} className='relative flex items-start'>
                       <div className='flex h-6 items-center'>
@@ -131,7 +131,7 @@ export default function Home() {
           </div>
           <div className='px-4 py-5'>
             {/* Content goes here */}
-            {latexText}
+            <p className='font-mono text-xl'>{latexText}</p>
           </div>
         </div>
       </div>
