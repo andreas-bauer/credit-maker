@@ -51,7 +51,7 @@ export default function Home() {
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
             {/* Card header */}
-            <label className='text-xl'>Author information</label>
+            <label className='text-xl text-gray-900'>Author information</label>
           </div>
           <div className='p-5'>
             {/* Content goes here */}
