@@ -1,4 +1,5 @@
 'use client'
+import { Radio, RadioGroup } from '@headlessui/react'
 import { allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
 import { toSimpleLatex } from '../lib/credit/generator-latex'
 import { CreditGenerator } from '../lib/credit/generator'
@@ -6,6 +7,7 @@ import { useState } from 'react'
 import { toPlainText } from '@/lib/credit/generator-plaintext'
 
 const DEFAULT_STYLE = 'Plain Text'
+const MAX_NUM_AUTHORS = 6
 
 const availableStyles: { [key: string]: CreditGenerator } = {
   [DEFAULT_STYLE]: toPlainText,
@@ -13,6 +15,7 @@ const availableStyles: { [key: string]: CreditGenerator } = {
 }
 
 export default function Home() {
+  const [numAuthors, setNumAuthors] = useState(1)
   const [latexText, setLatexText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
 
@@ -47,20 +50,50 @@ export default function Home() {
           <div className='p-5'>
             {/* Content goes here */}
             <form id='author-form' className='space-y-4 ' action={onFormAction}>
-              <div className='rounded-md p-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600'>
-                <label
-                  htmlFor='author-name'
-                  className='block text-xs font-medium text-gray-900'
+              <fieldset aria-label='Choose a memory option'>
+                <div className='flex items-center justify-between'>
+                  <div className='text-sm font-medium leading-6 text-gray-900'>
+                    Number of authors
+                  </div>
+                </div>
+
+                <RadioGroup
+                  value={numAuthors}
+                  onChange={setNumAuthors}
+                  className='mt-2 grid grid-cols-3 gap-4 sm:grid-cols-6'
                 >
-                  Author name
-                </label>
-                <input
-                  id='author-name'
-                  name='author-name'
-                  type='text'
-                  placeholder='Andreas Bauer'
-                  className='block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0'
-                />
+                  {Array.from(
+                    { length: MAX_NUM_AUTHORS },
+                    (_, index) => index + 1
+                  ).map((option) => (
+                    <Radio
+                      key={'option-' + option}
+                      value={option}
+                      className='flex cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50 focus:outline-none data-[checked]:bg-indigo-600 data-[checked]:text-white data-[checked]:ring-0 data-[focus]:data-[checked]:ring-2 data-[focus]:ring-2 data-[focus]:ring-indigo-600 data-[focus]:ring-offset-2 data-[checked]:hover:bg-indigo-500 sm:flex-1 [&:not([data-focus],[data-checked])]:ring-inset'
+                    >
+                      {option}
+                    </Radio>
+                  ))}
+                </RadioGroup>
+              </fieldset>
+
+              <div>
+                {Array.from(
+                  { length: numAuthors },
+                  (_, index) => index + 1
+                ).map((num) => (
+                  <div key={num} className='mt-2 flex rounded-md shadow-sm'>
+                    <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-500 sm:text-sm'>
+                      Author {num}
+                    </span>
+                    <input
+                      id={'author-name-' + num}
+                      name={'author-name-' + num}
+                      type='text'
+                      className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                    />
+                  </div>
+                ))}
               </div>
 
               <fieldset>
@@ -74,7 +107,7 @@ export default function Home() {
                           name={key}
                           type='checkbox'
                           aria-describedby={`${key}-description`}
-                          className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
+                          className='h-4 w-4 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                         />
                       </div>
                       <div className='ml-3 text-sm leading-6'>
