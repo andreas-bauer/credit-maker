@@ -21,6 +21,15 @@ export function isCredit(value: string): value is Credit {
   return ALL_CREDITS.includes(value as Credit)
 }
 
+export interface Author {
+  name: string
+  credits: Credit[]
+}
+
+export interface Authors {
+  [key: string]: Author
+}
+
 export interface CreditRole {
   name: string
   definition: string

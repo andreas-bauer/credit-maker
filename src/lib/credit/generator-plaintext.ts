@@ -1,11 +1,18 @@
-import { allCreditRoles, Credit } from './credit'
+import { allCreditRoles, Authors } from './credit'
 
-export function toPlainText(authorName: string, credits: Credit[]): string {
-  let allAuthorCredits = ''
-  credits.forEach((creditKey) => {
-    allAuthorCredits += ', ' + allCreditRoles[creditKey].name
+export function toPlainText(authors: Authors): string {
+  let result = ''
+
+  Object.values(authors).forEach((author) => {
+    let authorLine = ''
+
+    author.credits.forEach((creditKey) => {
+      authorLine += ', ' + allCreditRoles[creditKey].name
+    })
+    authorLine = authorLine.slice(2)
+
+    result += author.name + ': ' + authorLine + ';'
   })
-  allAuthorCredits = allAuthorCredits.slice(2)
 
-  return authorName + ': ' + allAuthorCredits
+  return result
 }

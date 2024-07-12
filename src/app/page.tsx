@@ -1,6 +1,6 @@
 'use client'
 import { Radio, RadioGroup } from '@headlessui/react'
-import { allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
+import { Authors, allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
 import { toSimpleLatex } from '../lib/credit/generator-latex'
 import { CreditGenerator } from '../lib/credit/generator'
 import { useState } from 'react'
@@ -20,24 +20,30 @@ const availableStyles: { [key: string]: CreditGenerator } = {
 
 export default function Home() {
   const [numAuthors, setNumAuthors] = useState(1)
-  const [latexText, setLatexText] = useState('')
+  const [outputText, setOutputText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
 
   const numAuthorsIdx = maxAuthorsIdx.slice(0, numAuthors)
 
   const onFormAction = (formData: FormData) => {
-    const authorName: string =
-      formData.get('author-name')?.toString() || 'Author1'
+    const authorsWithCredits: Authors = {}
 
-    const authorCredits: Credit[] = []
-    formData.forEach((_v, k, _) => {
-      if (isCredit(k)) {
-        authorCredits.push(k as Credit)
+    formData.forEach((v, k, _) => {
+      const [authorId, attribute] = k.split('-')
+      if (!authorsWithCredits[authorId]) {
+        authorsWithCredits[authorId] = { name: '', credits: [] }
+      }
+
+      if (attribute === 'author') {
+        authorsWithCredits[authorId].name = v.toString() || 'Author' + authorId
+      } else if (isCredit(attribute)) {
+        authorsWithCredits[authorId].credits.push(attribute as Credit)
       }
     })
 
     const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
-    setLatexText(genFn(authorName, authorCredits))
+    setOutputText(genFn(authorsWithCredits))
+    console.log(authorsWithCredits)
   }
 
   const onCopyHandler = () => {
@@ -87,8 +93,8 @@ export default function Home() {
                       Author {num}
                     </span>
                     <input
-                      id={'author-name-' + num}
-                      name={'author-name-' + num}
+                      id={num + '-author'}
+                      name={num + '-author'}
                       type='text'
                       className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                     />
@@ -112,11 +118,11 @@ export default function Home() {
                   {Object.entries(allCreditRoles).map(([key, role]) => (
                     <div key={key} className='relative flex items-start'>
                       <div className='flex h-6 items-center space-x-1'>
-                        {numAuthorsIdx.map((id) => (
+                        {numAuthorsIdx.map((authId) => (
                           <input
-                            id={key + '-' + id}
-                            key={'ckb-' + id}
-                            name={'ckb-' + id}
+                            id={key + '-' + authId}
+                            key={'ckb-a' + authId + '-' + key}
+                            name={authId + '-' + key}
                             type='checkbox'
                             aria-describedby={`${key}-description`}
                             className='h-4 w-4 cursor-pointer items-center rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
@@ -178,7 +184,7 @@ export default function Home() {
           </div>
           <div className='px-4 py-5'>
             {/* Content goes here */}
-            <p className='font-mono text-xl'>{latexText}</p>
+            <p className='font-mono text-xl text-gray-900'>{outputText}</p>
           </div>
         </div>
       </div>

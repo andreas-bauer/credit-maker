@@ -1,6 +1,3 @@
-import { Credit } from './credit'
+import { Authors } from './credit'
 
-export type CreditGenerator = (
-  _authorName: string,
-  _credits: Credit[]
-) => string
+export type CreditGenerator = (_authors: Authors) => string
