@@ -8,6 +8,10 @@ import { toPlainText } from '@/lib/credit/generator-plaintext'
 
 const DEFAULT_STYLE = 'Plain Text'
 const MAX_NUM_AUTHORS = 6
+const maxAuthorsIdx = Array.from(
+  { length: MAX_NUM_AUTHORS },
+  (_, index) => index + 1
+)
 
 const availableStyles: { [key: string]: CreditGenerator } = {
   [DEFAULT_STYLE]: toPlainText,
@@ -18,6 +22,8 @@ export default function Home() {
   const [numAuthors, setNumAuthors] = useState(1)
   const [latexText, setLatexText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
+
+  const numAuthorsIdx = maxAuthorsIdx.slice(0, numAuthors)
 
   const onFormAction = (formData: FormData) => {
     const authorName: string =
@@ -62,10 +68,7 @@ export default function Home() {
                   onChange={setNumAuthors}
                   className='mt-2 grid grid-cols-3 gap-4 sm:grid-cols-6'
                 >
-                  {Array.from(
-                    { length: MAX_NUM_AUTHORS },
-                    (_, index) => index + 1
-                  ).map((option) => (
+                  {maxAuthorsIdx.map((option) => (
                     <Radio
                       key={'option-' + option}
                       value={option}
@@ -78,10 +81,7 @@ export default function Home() {
               </fieldset>
 
               <div>
-                {Array.from(
-                  { length: numAuthors },
-                  (_, index) => index + 1
-                ).map((num) => (
+                {numAuthorsIdx.map((num) => (
                   <div key={num} className='mt-2 flex rounded-md shadow-sm'>
                     <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-500 sm:text-sm'>
                       Author {num}
@@ -98,18 +98,32 @@ export default function Home() {
 
               <fieldset>
                 <legend className='sr-only'>Credit roles</legend>
+                <div className='flex items-start space-x-1'>
+                  {numAuthorsIdx.map((id) => (
+                    <p
+                      key={'lbl-cbk-' + id}
+                      className='v-4 w-4 text-center text-gray-500'
+                    >
+                      {id}
+                    </p>
+                  ))}
+                </div>
                 <div className='space-y-3'>
                   {Object.entries(allCreditRoles).map(([key, role]) => (
                     <div key={key} className='relative flex items-start'>
-                      <div className='flex h-6 items-center'>
-                        <input
-                          id={key}
-                          name={key}
-                          type='checkbox'
-                          aria-describedby={`${key}-description`}
-                          className='h-4 w-4 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
-                        />
+                      <div className='flex h-6 items-center space-x-1'>
+                        {numAuthorsIdx.map((id) => (
+                          <input
+                            id={key + '-' + id}
+                            key={'ckb-' + id}
+                            name={'ckb-' + id}
+                            type='checkbox'
+                            aria-describedby={`${key}-description`}
+                            className='h-4 w-4 cursor-pointer items-center rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
+                          />
+                        ))}
                       </div>
+
                       <div className='ml-3 text-sm leading-6'>
                         <label
                           htmlFor={`ckb-${role.name}`}
