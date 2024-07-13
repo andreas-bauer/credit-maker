@@ -11,7 +11,7 @@ export function toPlainText(authors: Authors): string {
     })
     authorLine = authorLine.slice(2)
 
-    result += author.name + ': ' + authorLine + ';'
+    result += author.name + ': ' + authorLine + ';\n'
   })
 
   return result

@@ -1,7 +1,7 @@
 import { allCreditRoles, Authors } from './credit'
 
 export function toSimpleLatex(authors: Authors): string {
-  let result = ''
+  let result = '\\begin{itemize}\n'
 
   Object.values(authors).forEach((author) => {
     let authorLine = ''
@@ -11,8 +11,10 @@ export function toSimpleLatex(authors: Authors): string {
     })
     authorLine = authorLine.slice(2)
 
-    result += '\\textit{' + author.name + ':} ' + authorLine
+    result += '\t\\item \\textit{' + author.name + ':} ' + authorLine + '\n'
   })
+
+  result += '\\end{itemize}'
 
   return result
 }

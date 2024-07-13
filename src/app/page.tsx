@@ -184,7 +184,9 @@ export default function Home() {
           </div>
           <div className='px-4 py-5'>
             {/* Content goes here */}
-            <p className='font-mono text-xl text-gray-900'>{outputText}</p>
+            <pre className='text-wrap font-mono text-xl text-gray-900'>
+              {outputText}
+            </pre>
           </div>
         </div>
       </div>
