@@ -47,7 +47,7 @@ export default function Home() {
   }
 
   const onCopyHandler = () => {
-    console.log('TODO: imlement functionality')
+    navigator.clipboard.writeText(outputText)
   }
 
   return (
