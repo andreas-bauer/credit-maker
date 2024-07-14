@@ -5,6 +5,7 @@ import { toSimpleLatex } from '../lib/credit/generator-latex'
 import { CreditGenerator } from '../lib/credit/generator'
 import { useEffect, useState } from 'react'
 import { toPlainText } from '@/lib/credit/generator-plaintext'
+import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
 
 const DEFAULT_STYLE = 'Plain Text'
 const MAX_NUM_AUTHORS = 6
@@ -23,6 +24,7 @@ export default function Home() {
   const [outputText, setOutputText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
   const [authorsWithCredits, setAuthorsWithCredits] = useState<Authors>({})
+  const [showSuccessCopy, setShowSuccessCopy] = useState<boolean>(false)
 
   const numAuthorsIdx = maxAuthorsIdx.slice(0, numAuthors)
 
@@ -51,6 +53,11 @@ export default function Home() {
 
   const onCopyHandler = () => {
     navigator.clipboard.writeText(outputText)
+
+    setShowSuccessCopy(true)
+    setTimeout(() => {
+      setShowSuccessCopy(false)
+    }, 2000)
   }
 
   return (
@@ -161,20 +168,7 @@ export default function Home() {
               form='author-form'
               className='relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover'
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                className='-ml-0.5 h-5 w-5'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z'
-                />
-              </svg>
+              <PlayIcon className='-ml-0.5 h-5 w-5' />
               Generate Text
             </button>
 
@@ -194,23 +188,15 @@ export default function Home() {
             <button
               type='submit'
               onClick={onCopyHandler}
-              className='inline-flex gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-dark shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100'
+              className='inline-flex w-24 justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-dark shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100'
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                className='-ml-0.5 h-5 w-5'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z'
-                />
-              </svg>
-              Copy
+              <CheckIcon
+                className={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? '' : 'hidden'}`}
+              />
+              <ClipboardIcon
+                className={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? 'hidden' : ''}`}
+              />
+              {showSuccessCopy ? 'Copied!' : 'Copy'}
             </button>
           </div>
           <div className='px-4 py-5'>
