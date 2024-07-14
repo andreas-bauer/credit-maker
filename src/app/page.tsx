@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-12'>
-      <div className='w-fullconst flex flex-row gap-4'>
+      <div className='w-fullconst z-10 flex flex-row gap-4'>
         {/* Left side */}
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
