@@ -77,10 +77,10 @@ export default function Home() {
   }
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-12'>
+    <main className='flex min-h-screen flex-col items-center justify-between p-8'>
       <div className='w-fullconst z-10 flex flex-row gap-4'>
         {/* Left side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
             {/* Card header */}
             <label className='text-xl text-gray-dark'>Author information</label>
@@ -181,7 +181,7 @@ export default function Home() {
         </div>
 
         {/* Right side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex flex-wrap items-center justify-between px-4 py-4'>
             {/* Card header */}
             <button
