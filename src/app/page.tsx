@@ -1,11 +1,11 @@
 'use client'
-import { Radio, RadioGroup } from '@headlessui/react'
-import { Authors, allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
-import { toSimpleLatex } from '../lib/credit/generator-latex'
-import { CreditGenerator } from '../lib/credit/generator'
 import { useEffect, useRef, useState } from 'react'
-import { toPlainText } from '@/lib/credit/generator-plaintext'
 import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
+import { Radio, RadioGroup } from '@headlessui/react'
+import { Authors, allCreditRoles, Credit, isCredit } from '@/lib/credit/credit'
+import { CreditGenerator } from '@/lib/credit/generator'
+import { toSimpleLatex } from '@/lib/credit/generator-latex'
+import { toPlainText } from '@/lib/credit/generator-plaintext'
 
 const DEFAULT_STYLE = 'Plain Text'
 const MAX_NUM_AUTHORS = 6
