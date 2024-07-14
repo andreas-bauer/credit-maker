@@ -2,10 +2,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
 import { Radio, RadioGroup } from '@headlessui/react'
+import { PrimaryButton } from '@/components/PrimaryButton'
 import { Authors, allCreditRoles, Credit, isCredit } from '@/lib/credit/credit'
 import { CreditGenerator } from '@/lib/credit/generator'
 import { toSimpleLatex } from '@/lib/credit/generator-latex'
 import { toPlainText } from '@/lib/credit/generator-plaintext'
+import { SecondaryButton } from '@/components/SecondaryButton'
 
 const DEFAULT_STYLE = 'Plain Text'
 const MAX_NUM_AUTHORS = 6
@@ -77,10 +79,10 @@ export default function Home() {
   }
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-12'>
-      <div className='w-fullconst flex flex-row gap-4'>
+    <main className='flex min-h-screen flex-col items-center justify-between p-4'>
+      <div className='w-fullconst z-10 flex flex-row gap-4'>
         {/* Left side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
             {/* Card header */}
             <label className='text-xl text-gray-dark'>Author information</label>
@@ -181,22 +183,19 @@ export default function Home() {
         </div>
 
         {/* Right side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex flex-wrap items-center justify-between px-4 py-4'>
             {/* Card header */}
-            <button
-              type='submit'
-              form='author-form'
-              className='relative inline-flex items-center gap-x-1.5 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover'
-            >
+            <PrimaryButton tabIndex={20} type='submit' form='author-form'>
               <PlayIcon className='-ml-0.5 h-5 w-5' />
               Generate Text
-            </button>
+            </PrimaryButton>
 
             <div>
               <select
                 id='generator-style'
                 name='generator style'
+                tabIndex={21}
                 onChange={(e) => setSelectedStyle(e.target.value)}
                 className='block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6'
               >
@@ -206,10 +205,11 @@ export default function Home() {
               </select>
             </div>
 
-            <button
+            <SecondaryButton
               type='submit'
+              className='w-24'
+              tabIndex={22}
               onClick={onCopyHandler}
-              className='inline-flex w-24 justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-dark shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100'
             >
               <CheckIcon
                 className={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? '' : 'hidden'}`}
@@ -218,7 +218,7 @@ export default function Home() {
                 className={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? 'hidden' : ''}`}
               />
               {showSuccessCopy ? 'Copied!' : 'Copy'}
-            </button>
+            </SecondaryButton>
           </div>
           <div className='px-4 py-5'>
             {/* Content goes here */}

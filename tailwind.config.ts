@@ -11,10 +11,10 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          ...colors.indigo,
-          DEFAULT: colors.indigo[600],
-          hover: colors.indigo[500],
-          passive: colors.indigo[400],
+          ...colors.blue,
+          DEFAULT: colors.blue[600],
+          hover: colors.blue[500],
+          passive: colors.blue[400],
         },
         'gray-light': colors.gray[500],
         'gray-dark': colors.gray[900],
