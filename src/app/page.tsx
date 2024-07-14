@@ -3,7 +3,7 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import { Authors, allCreditRoles, Credit, isCredit } from '../lib/credit/credit'
 import { toSimpleLatex } from '../lib/credit/generator-latex'
 import { CreditGenerator } from '../lib/credit/generator'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toPlainText } from '@/lib/credit/generator-plaintext'
 import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
 
@@ -19,36 +19,52 @@ const availableStyles: { [key: string]: CreditGenerator } = {
   'LaTeX Simple': toSimpleLatex,
 }
 
+function formAsAuthors(formData: FormData): Authors {
+  const authors: Authors = {}
+
+  formData.forEach((v, k, _) => {
+    const [authorId, attribute] = k.split('-')
+    if (!authors[authorId]) {
+      authors[authorId] = { name: '', credits: [] }
+    }
+
+    if (attribute === 'author') {
+      authors[authorId].name = v.toString() || 'Author' + authorId
+    } else if (isCredit(attribute)) {
+      authors[authorId].credits.push(attribute as Credit)
+    }
+  })
+
+  return authors
+}
+
 export default function Home() {
+  const authorFormRef = useRef<HTMLFormElement | null>(null)
   const [numAuthors, setNumAuthors] = useState(1)
   const [outputText, setOutputText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
-  const [authorsWithCredits, setAuthorsWithCredits] = useState<Authors>({})
   const [showSuccessCopy, setShowSuccessCopy] = useState<boolean>(false)
 
   const numAuthorsIdx = maxAuthorsIdx.slice(0, numAuthors)
 
+  function getAuthorsWithCredits(): Authors {
+    if (authorFormRef.current === null) {
+      authorFormRef.current = new HTMLFormElement()
+    }
+    const formData = new FormData(authorFormRef.current)
+    return formAsAuthors(formData)
+  }
+
   useEffect(() => {
+    const authorsWithCredits = getAuthorsWithCredits()
     const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
     setOutputText(genFn(authorsWithCredits))
-  }, [authorsWithCredits, selectedStyle])
+  }, [numAuthors, selectedStyle])
 
   const onFormAction = (formData: FormData) => {
-    const authors: Authors = {}
-
-    formData.forEach((v, k, _) => {
-      const [authorId, attribute] = k.split('-')
-      if (!authors[authorId]) {
-        authors[authorId] = { name: '', credits: [] }
-      }
-
-      if (attribute === 'author') {
-        authors[authorId].name = v.toString() || 'Author' + authorId
-      } else if (isCredit(attribute)) {
-        authors[authorId].credits.push(attribute as Credit)
-      }
-    })
-    setAuthorsWithCredits(authors)
+    const authorsWithCredits = formAsAuthors(formData)
+    const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
+    setOutputText(genFn(authorsWithCredits))
   }
 
   const onCopyHandler = () => {
@@ -71,7 +87,12 @@ export default function Home() {
           </div>
           <div className='p-5'>
             {/* Content goes here */}
-            <form id='author-form' className='space-y-4 ' action={onFormAction}>
+            <form
+              id='author-form'
+              ref={authorFormRef}
+              className='space-y-4 '
+              action={onFormAction}
+            >
               <fieldset aria-label='Choose the number of authors'>
                 <div className='flex items-center justify-between'>
                   <div className='text-sm font-medium leading-6 text-gray-dark'>
