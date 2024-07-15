@@ -180,7 +180,10 @@ export default function Home() {
                         >
                           {role.name}
                         </label>
-                        <p id={`ckb-${role.name}`} className='text-gray-light'>
+                        <p
+                          id={`ckb-${role.name}`}
+                          className='text-wrap text-gray-light'
+                        >
                           {role.definition}
                         </p>
                       </div>
