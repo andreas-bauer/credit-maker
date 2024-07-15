@@ -147,7 +147,7 @@ export default function Home() {
 
               <fieldset>
                 <legend className='sr-only'>Credit roles</legend>
-                <div className='flex items-start space-x-1'>
+                <div className='flex items-start space-x-2'>
                   {numContributorsIdx.map((id) => (
                     <p
                       key={'lbl-cbk-' + id}
@@ -160,7 +160,7 @@ export default function Home() {
                 <div className='space-y-3'>
                   {Object.entries(allCreditRoles).map(([key, role]) => (
                     <div key={key} className='relative flex items-start'>
-                      <div className='flex h-6 items-center space-x-1'>
+                      <div className='flex h-6 items-center space-x-2'>
                         {numContributorsIdx.map((authId) => (
                           <input
                             id={key + '-' + authId}
