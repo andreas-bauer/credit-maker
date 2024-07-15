@@ -11,7 +11,7 @@ export function Header() {
         </div>
 
         <div className='mx-auto flex items-center border-b border-blue-600/10'>
-          <p className='font-mono text-2xl text-blue-600'>CREDIT Maker</p>
+          <p className='font-mono text-2xl text-blue-600'>CRediT Maker</p>
         </div>
 
         <div className='hidden grow basis-0 justify-end sm:flex'>
