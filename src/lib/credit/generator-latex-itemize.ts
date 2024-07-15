@@ -1,17 +1,18 @@
-import { allCreditRoles, Authors } from './credit'
+import { allCreditRoles, Contributors } from './credit'
 
-export function toLatexItemize(authors: Authors): string {
+export function toLatexItemize(contributors: Contributors): string {
   let result = '\\begin{itemize}\n'
 
-  Object.values(authors).forEach((author) => {
-    let authorLine = ''
+  Object.values(contributors).forEach((person) => {
+    let contributorLine = ''
 
-    author.credits.forEach((creditKey) => {
-      authorLine += ', ' + allCreditRoles[creditKey].name
+    person.credits.forEach((creditKey) => {
+      contributorLine += ', ' + allCreditRoles[creditKey].name
     })
-    authorLine = authorLine.slice(2)
+    contributorLine = contributorLine.slice(2)
 
-    result += '\t\\item \\textit{' + author.name + ':} ' + authorLine + '\n'
+    result +=
+      '\t\\item \\textit{' + person.name + ':} ' + contributorLine + '\n'
   })
 
   result += '\\end{itemize}'

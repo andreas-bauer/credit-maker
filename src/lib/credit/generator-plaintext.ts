@@ -1,17 +1,17 @@
-import { allCreditRoles, Authors } from './credit'
+import { allCreditRoles, Contributors } from './credit'
 
-export function toPlainText(authors: Authors): string {
+export function toPlainText(contributors: Contributors): string {
   let result = ''
 
-  Object.values(authors).forEach((author) => {
-    let authorLine = ''
+  Object.values(contributors).forEach((person) => {
+    let contributorLine = ''
 
-    author.credits.forEach((creditKey) => {
-      authorLine += ', ' + allCreditRoles[creditKey].name
+    person.credits.forEach((creditKey) => {
+      contributorLine += ', ' + allCreditRoles[creditKey].name
     })
-    authorLine = authorLine.slice(2)
+    contributorLine = contributorLine.slice(2)
 
-    result += author.name + ': ' + authorLine + ';\n'
+    result += person.name + ': ' + contributorLine + ';\n'
   })
 
   return result
