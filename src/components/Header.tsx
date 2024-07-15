@@ -14,7 +14,14 @@ export function Header() {
           <p className='font-mono text-2xl text-blue-600'>CRediT Maker</p>
         </div>
 
-        <div className='hidden grow basis-0 justify-end sm:flex'>
+        <div className='hidden grow basis-0 justify-end gap-x-5 sm:flex'>
+          <a
+            href='https://credit.niso.org/'
+            target='_blank'
+            className='hidden items-center gap-x-1.5 font-medium text-blue-600 hover:underline md:inline-flex dark:text-blue-500'
+          >
+            more about CRediT
+          </a>
           <a
             href='https://github.com/andreas-bauer/credit-maker'
             target='_blank'
