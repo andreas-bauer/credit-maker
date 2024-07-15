@@ -8,7 +8,9 @@ export function toLatexText(authors: Authors): string {
     author.credits.forEach((creditKey) => {
       authorCredits.push(allCreditRoles[creditKey].name)
     })
-    creditStatement.push('\\textbf{' + author.name + ':} ' + authorCredits.join(', '))
+    creditStatement.push(
+      '\\textbf{' + author.name + ':} ' + authorCredits.join(', ')
+    )
   })
 
   return creditStatement.join('; ')
