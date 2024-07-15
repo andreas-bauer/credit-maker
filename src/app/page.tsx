@@ -130,19 +130,26 @@ export default function Home() {
               </fieldset>
 
               <div>
-                {numContributorsIdx.map((num) => (
-                  <div key={num} className='mt-2 flex rounded-md shadow-sm'>
-                    <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-light sm:text-sm'>
-                      Contributor {num}
-                    </span>
-                    <input
-                      id={num + '-contributor'}
-                      name={num + '-contributor'}
-                      type='text'
-                      className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6'
-                    />
+                <div className='flex items-center justify-between'>
+                  <div className='text-sm font-medium leading-6 text-gray-dark'>
+                    Contributor names
                   </div>
-                ))}
+                </div>
+                <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+                  {numContributorsIdx.map((num) => (
+                    <div key={num} className='mt-2 flex rounded-md shadow-sm'>
+                      <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-light sm:text-sm'>
+                        {num}
+                      </span>
+                      <input
+                        id={num + '-contributor'}
+                        name={num + '-contributor'}
+                        type='text'
+                        className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6'
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <fieldset>
