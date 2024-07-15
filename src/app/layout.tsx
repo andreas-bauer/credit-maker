@@ -9,8 +9,8 @@ import { Footer } from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Credit Maker',
-  description: 'Create CREDIT statements easily',
+  title: 'CRediT Maker',
+  description: 'Create CRediT statements easily',
 }
 
 export default function RootLayout({
