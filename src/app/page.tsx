@@ -87,7 +87,7 @@ export default function Home() {
   }
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-4'>
+    <main className='flex min-h-screen flex-col items-center justify-between bg-white p-4'>
       <div className='w-fullconst z-10 flex flex-row gap-4'>
         {/* Left side */}
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
