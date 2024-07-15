@@ -3,7 +3,12 @@ import { useEffect, useRef, useState } from 'react'
 import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
 import { Radio, RadioGroup } from '@headlessui/react'
 import { PrimaryButton } from '@/components/PrimaryButton'
-import { Authors, allCreditRoles, Credit, isCredit } from '@/lib/credit/credit'
+import {
+  Contributors,
+  allCreditRoles,
+  Credit,
+  isCredit,
+} from '@/lib/credit/credit'
 import { CreditGenerator } from '@/lib/credit/generator'
 import { toLatexText } from '@/lib/credit/generator-latex-text'
 import { toLatexItemize } from '@/lib/credit/generator-latex-itemize'
@@ -11,9 +16,9 @@ import { toPlainText } from '@/lib/credit/generator-plaintext'
 import { SecondaryButton } from '@/components/SecondaryButton'
 
 const DEFAULT_STYLE = 'Plain Text'
-const MAX_NUM_AUTHORS = 6
-const maxAuthorsIdx = Array.from(
-  { length: MAX_NUM_AUTHORS },
+const MAX_NUM_CONTRIBUTORS = 6
+const maxContributorIdx = Array.from(
+  { length: MAX_NUM_CONTRIBUTORS },
   (_, index) => index + 1
 )
 
@@ -23,52 +28,53 @@ const availableStyles: { [key: string]: CreditGenerator } = {
   'LaTeX text': toLatexText,
 }
 
-function formAsAuthors(formData: FormData): Authors {
-  const authors: Authors = {}
+function formAsContributor(formData: FormData): Contributors {
+  const contributors: Contributors = {}
 
   formData.forEach((v, k, _) => {
-    const [authorId, attribute] = k.split('-')
-    if (!authors[authorId]) {
-      authors[authorId] = { name: '', credits: [] }
+    const [contributorId, attribute] = k.split('-')
+    if (!contributors[contributorId]) {
+      contributors[contributorId] = { name: '', credits: [] }
     }
 
-    if (attribute === 'author') {
-      authors[authorId].name = v.toString() || 'Author' + authorId
+    if (attribute === 'contributor') {
+      contributors[contributorId].name =
+        v.toString() || 'Contributor' + contributorId
     } else if (isCredit(attribute)) {
-      authors[authorId].credits.push(attribute as Credit)
+      contributors[contributorId].credits.push(attribute as Credit)
     }
   })
 
-  return authors
+  return contributors
 }
 
 export default function Home() {
-  const authorFormRef = useRef<HTMLFormElement | null>(null)
-  const [numAuthors, setNumAuthors] = useState(1)
+  const contributorFormRef = useRef<HTMLFormElement | null>(null)
+  const [numContributors, setNumContributors] = useState(1)
   const [outputText, setOutputText] = useState('')
   const [selectedStyle, setSelectedStyle] = useState(DEFAULT_STYLE)
   const [showSuccessCopy, setShowSuccessCopy] = useState<boolean>(false)
 
-  const numAuthorsIdx = maxAuthorsIdx.slice(0, numAuthors)
+  const numContributorsIdx = maxContributorIdx.slice(0, numContributors)
 
-  function getAuthorsWithCredits(): Authors {
-    if (authorFormRef.current === null) {
-      authorFormRef.current = new HTMLFormElement()
+  function getContributorsWithCredits(): Contributors {
+    if (contributorFormRef.current === null) {
+      contributorFormRef.current = new HTMLFormElement()
     }
-    const formData = new FormData(authorFormRef.current)
-    return formAsAuthors(formData)
+    const formData = new FormData(contributorFormRef.current)
+    return formAsContributor(formData)
   }
 
   useEffect(() => {
-    const authorsWithCredits = getAuthorsWithCredits()
+    const contributorsWithCredits = getContributorsWithCredits()
     const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
-    setOutputText(genFn(authorsWithCredits))
-  }, [numAuthors, selectedStyle])
+    setOutputText(genFn(contributorsWithCredits))
+  }, [numContributors, selectedStyle])
 
   const onFormAction = (formData: FormData) => {
-    const authorsWithCredits = formAsAuthors(formData)
+    const contributorsWithCredits = formAsContributor(formData)
     const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
-    setOutputText(genFn(authorsWithCredits))
+    setOutputText(genFn(contributorsWithCredits))
   }
 
   const onCopyHandler = () => {
@@ -87,29 +93,31 @@ export default function Home() {
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
             {/* Card header */}
-            <label className='text-xl text-gray-dark'>Author information</label>
+            <label className='text-xl text-gray-dark'>
+              Contributor information
+            </label>
           </div>
           <div className='p-5'>
             {/* Content goes here */}
             <form
-              id='author-form'
-              ref={authorFormRef}
+              id='contributor-form'
+              ref={contributorFormRef}
               className='space-y-4 '
               action={onFormAction}
             >
-              <fieldset aria-label='Choose the number of authors'>
+              <fieldset aria-label='Choose the number of contributors'>
                 <div className='flex items-center justify-between'>
                   <div className='text-sm font-medium leading-6 text-gray-dark'>
-                    Number of authors
+                    Number of contributors
                   </div>
                 </div>
 
                 <RadioGroup
-                  value={numAuthors}
-                  onChange={setNumAuthors}
+                  value={numContributors}
+                  onChange={setNumContributors}
                   className='mt-2 grid grid-cols-3 gap-4 sm:grid-cols-6'
                 >
-                  {maxAuthorsIdx.map((option) => (
+                  {maxContributorIdx.map((option) => (
                     <Radio
                       key={'option-' + option}
                       value={option}
@@ -122,14 +130,14 @@ export default function Home() {
               </fieldset>
 
               <div>
-                {numAuthorsIdx.map((num) => (
+                {numContributorsIdx.map((num) => (
                   <div key={num} className='mt-2 flex rounded-md shadow-sm'>
                     <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-light sm:text-sm'>
-                      Author {num}
+                      Contributor {num}
                     </span>
                     <input
-                      id={num + '-author'}
-                      name={num + '-author'}
+                      id={num + '-contributor'}
+                      name={num + '-contributor'}
                       type='text'
                       className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6'
                     />
@@ -140,7 +148,7 @@ export default function Home() {
               <fieldset>
                 <legend className='sr-only'>Credit roles</legend>
                 <div className='flex items-start space-x-1'>
-                  {numAuthorsIdx.map((id) => (
+                  {numContributorsIdx.map((id) => (
                     <p
                       key={'lbl-cbk-' + id}
                       className='v-4 w-4 text-center text-gray-light'
@@ -153,7 +161,7 @@ export default function Home() {
                   {Object.entries(allCreditRoles).map(([key, role]) => (
                     <div key={key} className='relative flex items-start'>
                       <div className='flex h-6 items-center space-x-1'>
-                        {numAuthorsIdx.map((authId) => (
+                        {numContributorsIdx.map((authId) => (
                           <input
                             id={key + '-' + authId}
                             key={'ckb-a' + authId + '-' + key}
@@ -188,7 +196,7 @@ export default function Home() {
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex flex-wrap items-center justify-between px-4 py-4'>
             {/* Card header */}
-            <PrimaryButton tabIndex={20} type='submit' form='author-form'>
+            <PrimaryButton tabIndex={20} type='submit' form='contributor-form'>
               <PlayIcon className='-ml-0.5 h-5 w-5' />
               Generate Text
             </PrimaryButton>

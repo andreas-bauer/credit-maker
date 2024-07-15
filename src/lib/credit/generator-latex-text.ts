@@ -1,15 +1,15 @@
-import { allCreditRoles, Authors } from './credit'
+import { allCreditRoles, Contributors } from './credit'
 
-export function toLatexText(authors: Authors): string {
+export function toLatexText(contributors: Contributors): string {
   let creditStatement: string[] = []
 
-  Object.values(authors).forEach((author) => {
-    let authorCredits: string[] = []
-    author.credits.forEach((creditKey) => {
-      authorCredits.push(allCreditRoles[creditKey].name)
+  Object.values(contributors).forEach((person) => {
+    let contributorCredits: string[] = []
+    person.credits.forEach((creditKey) => {
+      contributorCredits.push(allCreditRoles[creditKey].name)
     })
     creditStatement.push(
-      '\\textbf{' + author.name + ':} ' + authorCredits.join(', ')
+      '\\textbf{' + person.name + ':} ' + contributorCredits.join(', ')
     )
   })
 
