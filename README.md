@@ -24,4 +24,4 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 Copyright © 2024 Andreas Bauer
 
-This work (source code) is licensed under  [MIT](./LICENSE).
+This work (source code) is licensed under [MIT](./LICENSE).
