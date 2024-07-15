@@ -5,7 +5,8 @@ import { Radio, RadioGroup } from '@headlessui/react'
 import { PrimaryButton } from '@/components/PrimaryButton'
 import { Authors, allCreditRoles, Credit, isCredit } from '@/lib/credit/credit'
 import { CreditGenerator } from '@/lib/credit/generator'
-import { toSimpleLatex } from '@/lib/credit/generator-latex'
+import { toLatexText } from '@/lib/credit/generator-latex-text'
+import { toLatexItemize } from '@/lib/credit/generator-latex-itemize'
 import { toPlainText } from '@/lib/credit/generator-plaintext'
 import { SecondaryButton } from '@/components/SecondaryButton'
 
@@ -18,7 +19,8 @@ const maxAuthorsIdx = Array.from(
 
 const availableStyles: { [key: string]: CreditGenerator } = {
   [DEFAULT_STYLE]: toPlainText,
-  'LaTeX Simple': toSimpleLatex,
+  'LaTeX itemize': toLatexItemize,
+  'LaTeX text': toLatexText,
 }
 
 function formAsAuthors(formData: FormData): Authors {
