@@ -1,6 +1,6 @@
 import { allCreditRoles, Authors } from './credit'
 
-export function toSimpleLatex(authors: Authors): string {
+export function toLatexItemize(authors: Authors): string {
   let result = '\\begin{itemize}\n'
 
   Object.values(authors).forEach((author) => {
