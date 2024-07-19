@@ -1,6 +1,11 @@
 import { allCreditRoles, Contributors } from './credit'
 
-export function toPlainText(contributors: Contributors): string {
+const degreeOfContribution = ' (lead|equal|supporting)'
+
+function doToPlainText(
+  contributors: Contributors,
+  withDegree: boolean
+): string {
   let result = ''
 
   Object.values(contributors).forEach((person) => {
@@ -8,6 +13,9 @@ export function toPlainText(contributors: Contributors): string {
 
     person.credits.forEach((creditKey) => {
       contributorLine += ', ' + allCreditRoles[creditKey].name
+      if (withDegree) {
+        contributorLine += degreeOfContribution
+      }
     })
     contributorLine = contributorLine.slice(2)
 
@@ -15,4 +23,12 @@ export function toPlainText(contributors: Contributors): string {
   })
 
   return result
+}
+
+export function toPlainText(contributors: Contributors): string {
+  return doToPlainText(contributors, false)
+}
+
+export function toPlainTextWithDegree(contributors: Contributors): string {
+  return doToPlainText(contributors, true)
 }

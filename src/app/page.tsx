@@ -12,10 +12,13 @@ import {
 import { CreditGenerator } from '@/lib/credit/generator'
 import { toLatexText } from '@/lib/credit/generator-latex-text'
 import { toLatexItemize } from '@/lib/credit/generator-latex-itemize'
-import { toPlainText } from '@/lib/credit/generator-plaintext'
+import {
+  toPlainText,
+  toPlainTextWithDegree,
+} from '@/lib/credit/generator-plaintext'
 import { SecondaryButton } from '@/components/SecondaryButton'
 
-const DEFAULT_STYLE = 'Plain Text'
+const DEFAULT_STYLE = 'Plain text'
 const MAX_NUM_CONTRIBUTORS = 6
 const maxContributorIdx = Array.from(
   { length: MAX_NUM_CONTRIBUTORS },
@@ -24,6 +27,7 @@ const maxContributorIdx = Array.from(
 
 const availableStyles: { [key: string]: CreditGenerator } = {
   [DEFAULT_STYLE]: toPlainText,
+  'Plain text with degree options': toPlainTextWithDegree,
   'LaTeX itemize': toLatexItemize,
   'LaTeX text': toLatexText,
 }
