@@ -1,7 +1,12 @@
 {
   "name": "credit-maker",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreas-bauer/credit-maker.git"
+  },
+  "homepage": "https://andreas-bauer.github.io/credit-maker/",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
