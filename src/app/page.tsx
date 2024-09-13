@@ -106,7 +106,7 @@ export default function Home() {
             <form
               id='contributor-form'
               ref={contributorFormRef}
-              className='space-y-4 '
+              className='space-y-4'
               action={onFormAction}
             >
               <fieldset aria-label='Choose the number of contributors'>
