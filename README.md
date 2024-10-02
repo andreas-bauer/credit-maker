@@ -12,7 +12,13 @@ Link to hosted version:
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+After that, run the development server:
 
 ```bash
 npm run dev
