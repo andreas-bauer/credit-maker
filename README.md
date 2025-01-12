@@ -28,6 +28,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## License
 
-Copyright © 2024 Andreas Bauer
+Copyright © 2024-2025 Andreas Bauer
 
 This work (source code) is licensed under [MIT](./LICENSE).
