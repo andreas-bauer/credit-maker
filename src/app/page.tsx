@@ -208,22 +208,12 @@ export default function Home() {
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
           <div className='flex flex-wrap items-center justify-between gap-4 p-4'>
             {/* Card header */}
-            <PrimaryButton
-              tabIndex={20}
-              type='submit'
-              className='order-1'
-              form='contributor-form'
-            >
-              <PlayIcon className='-ml-0.5 h-5 w-5' />
-              Generate Text
-            </PrimaryButton>
-
             <select
               id='generator-style'
               name='generator style'
               tabIndex={21}
               onChange={(e) => setSelectedStyle(e.target.value)}
-              className='order-3 w-full rounded-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 lg:order-2 lg:w-44 lg:grow'
+              className='w-full rounded-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 lg:w-44 lg:grow'
             >
               {Object.entries(availableStyles).map(([key, _]) => (
                 <option key={key}>{key}</option>
@@ -232,7 +222,7 @@ export default function Home() {
 
             <SecondaryButton
               type='submit'
-              className='order-2 sm:w-24 lg:order-3'
+              className='w-full lg:w-24'
               tabIndex={22}
               onClick={onCopyHandler}
             >
@@ -242,9 +232,7 @@ export default function Home() {
               <ClipboardIcon
                 className={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? 'hidden' : ''}`}
               />
-              <span className='hidden sm:flex'>
-                {showSuccessCopy ? 'Copied!' : 'Copy'}
-              </span>
+              <span className=''>{showSuccessCopy ? 'Copied!' : 'Copy'}</span>
             </SecondaryButton>
           </div>
           <div className='px-4 py-5'>
