@@ -1,8 +1,7 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, ClipboardIcon } from '@heroicons/react/24/outline'
 import { Radio, RadioGroup } from '@headlessui/react'
-import { PrimaryButton } from '@/components/PrimaryButton'
 import {
   Contributors,
   allCreditRoles,
