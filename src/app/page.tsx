@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { CheckIcon, ClipboardIcon, PlayIcon } from '@heroicons/react/24/outline'
 import { Radio, RadioGroup } from '@headlessui/react'
 import { PrimaryButton } from '@/components/PrimaryButton'
@@ -69,17 +69,15 @@ export default function Home() {
     return formAsContributor(formData)
   }
 
-  useEffect(() => {
+  const onChange = useCallback(() => {
     const contributorsWithCredits = getContributorsWithCredits()
     const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
     setOutputText(genFn(contributorsWithCredits))
-  }, [numContributors, selectedStyle])
+  }, [selectedStyle])
 
-  const onFormAction = (formData: FormData) => {
-    const contributorsWithCredits = formAsContributor(formData)
-    const genFn: CreditGenerator = availableStyles[selectedStyle] || toPlainText
-    setOutputText(genFn(contributorsWithCredits))
-  }
+  useEffect(() => {
+    onChange()
+  }, [numContributors, selectedStyle, onChange])
 
   const onCopyHandler = () => {
     navigator.clipboard.writeText(outputText)
@@ -107,7 +105,7 @@ export default function Home() {
               id='contributor-form'
               ref={contributorFormRef}
               className='space-y-4'
-              action={onFormAction}
+              onChange={onChange}
             >
               <fieldset aria-label='Choose the number of contributors'>
                 <div className='flex items-center justify-between'>
