@@ -1,6 +1,10 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { CheckIcon, ClipboardIcon } from '@heroicons/react/24/outline'
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ClipboardIcon,
+} from '@heroicons/react/24/outline'
 import { Radio, RadioGroup } from '@headlessui/react'
 import {
   Contributors,
@@ -207,17 +211,23 @@ export default function Home() {
         <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow-sm'>
           <div className='flex flex-wrap items-center justify-between gap-4 p-4'>
             {/* Card header */}
-            <select
-              id='generator-style'
-              name='generator style'
-              tabIndex={21}
-              onChange={(e) => setSelectedStyle(e.target.value)}
-              className='text-gray-dark w-full rounded-md border-0 py-1.5 ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 lg:w-44 lg:grow'
-            >
-              {Object.entries(availableStyles).map(([key, _]) => (
-                <option key={key}>{key}</option>
-              ))}
-            </select>
+            <div className='grid w-full grid-cols-1 lg:w-44 lg:grow'>
+              <select
+                id='generator-style'
+                name='generator style'
+                tabIndex={21}
+                onChange={(e) => setSelectedStyle(e.target.value)}
+                className='text-gray-dark col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6'
+              >
+                {Object.entries(availableStyles).map(([key, _]) => (
+                  <option key={key}>{key}</option>
+                ))}
+              </select>
+              <ChevronDownIcon
+                aria-hidden='true'
+                className='pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4'
+              />
+            </div>
 
             <SecondaryButton
               type='submit'
