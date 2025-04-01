@@ -91,10 +91,10 @@ export default function Home() {
     <main className='flex min-h-screen flex-col items-center justify-between bg-white p-4'>
       <div className='w-fullconst z-10 flex flex-row gap-4'>
         {/* Left side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow-sm'>
           <div className='flex-wggrap flex items-center justify-between px-4 py-5'>
             {/* Card header */}
-            <label className='text-xl text-gray-dark'>
+            <label className='text-gray-dark text-xl'>
               Contributor information
             </label>
           </div>
@@ -108,7 +108,7 @@ export default function Home() {
             >
               <fieldset aria-label='Choose the number of contributors'>
                 <div className='flex items-center justify-between'>
-                  <div className='text-sm font-medium leading-6 text-gray-dark'>
+                  <div className='text-gray-dark text-sm leading-6 font-medium'>
                     Number of contributors
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export default function Home() {
                     <Radio
                       key={'option-' + option}
                       value={option}
-                      className='flex cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-dark ring-1 ring-gray-300 hover:bg-gray-50 focus:outline-none data-[checked]:bg-primary data-[checked]:text-white data-[checked]:ring-0 data-[focus]:data-[checked]:ring-2 data-[focus]:ring-2 data-[focus]:ring-primary data-[focus]:ring-offset-2 data-[checked]:hover:bg-primary-hover sm:flex-1 [&:not([data-focus],[data-checked])]:ring-inset'
+                      className='text-gray-dark data-checked:bg-primary data-focus:ring-primary data-checked:hover:bg-primary-hover flex cursor-pointer items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold ring-1 ring-gray-300 hover:bg-gray-50 focus:outline-hidden data-checked:text-white data-checked:ring-0 data-focus:ring-2 data-focus:ring-offset-2 data-focus:data-checked:ring-2 sm:flex-1 [&:not([data-focus],[data-checked])]:ring-inset'
                     >
                       {option}
                     </Radio>
@@ -132,21 +132,21 @@ export default function Home() {
 
               <div>
                 <div className='flex items-center justify-between'>
-                  <div className='text-sm font-medium leading-6 text-gray-dark'>
+                  <div className='text-gray-dark text-sm leading-6 font-medium'>
                     Contributor names
                   </div>
                 </div>
                 <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
                   {numContributorsIdx.map((num) => (
-                    <div key={num} className='mt-2 flex rounded-md shadow-sm'>
-                      <span className='inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-light sm:text-sm'>
+                    <div key={num} className='mt-2 flex rounded-md shadow-xs'>
+                      <span className='text-gray-light inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 sm:text-sm'>
                         {num}
                       </span>
                       <input
                         id={num + '-contributor'}
                         name={num + '-contributor'}
                         type='text'
-                        className='block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6'
+                        className='text-gray-dark focus:ring-primary block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 px-3 py-1.5 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6'
                       />
                     </div>
                   ))}
@@ -159,7 +159,7 @@ export default function Home() {
                   {numContributorsIdx.map((id) => (
                     <p
                       key={'lbl-cbk-' + id}
-                      className='v-4 w-4 text-center text-gray-light'
+                      className='v-4 text-gray-light w-4 text-center'
                     >
                       {id}
                     </p>
@@ -176,7 +176,7 @@ export default function Home() {
                             name={authId + '-' + key}
                             type='checkbox'
                             aria-describedby={`${key}-description`}
-                            className='h-4 w-4 cursor-pointer items-center rounded border-gray-300 text-primary focus:ring-primary'
+                            className='text-primary focus:ring-primary h-4 w-4 cursor-pointer items-center rounded-sm border-gray-300'
                           />
                         ))}
                       </div>
@@ -184,13 +184,13 @@ export default function Home() {
                       <div className='ml-3 text-sm leading-6'>
                         <label
                           htmlFor={`ckb-${role.name}`}
-                          className='font-medium text-gray-dark'
+                          className='text-gray-dark font-medium'
                         >
                           {role.name}
                         </label>
                         <p
                           id={`ckb-${role.name}`}
-                          className='text-wrap text-gray-light'
+                          className='text-gray-light text-wrap'
                         >
                           {role.definition}
                         </p>
@@ -204,7 +204,7 @@ export default function Home() {
         </div>
 
         {/* Right side */}
-        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow'>
+        <div className='w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow-sm'>
           <div className='flex flex-wrap items-center justify-between gap-4 p-4'>
             {/* Card header */}
             <select
@@ -212,7 +212,7 @@ export default function Home() {
               name='generator style'
               tabIndex={21}
               onChange={(e) => setSelectedStyle(e.target.value)}
-              className='w-full rounded-md border-0 py-1.5 text-gray-dark ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 lg:w-44 lg:grow'
+              className='text-gray-dark w-full rounded-md border-0 py-1.5 ring-1 ring-gray-300 ring-inset focus:ring-2 focus:ring-indigo-600 lg:w-44 lg:grow'
             >
               {Object.entries(availableStyles).map(([key, _]) => (
                 <option key={key}>{key}</option>
@@ -236,7 +236,7 @@ export default function Home() {
           </div>
           <div className='px-4 py-5'>
             {/* Content goes here */}
-            <pre className='text-wrap font-mono text-xl text-gray-dark'>
+            <pre className='text-gray-dark font-mono text-xl text-wrap'>
               {outputText}
             </pre>
           </div>

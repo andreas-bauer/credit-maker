@@ -8,7 +8,7 @@ type ButtonProps =
 
 export function PrimaryButton({ className, ...props }: ButtonProps) {
   className = clsx(
-    'inline-flex justify-center items-center rounded-md bg-primary gap-x-1.5 py-2 px-3 text-sm font-semibold text-white hover:bg-primary-hover focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70',
+    'inline-flex justify-center items-center rounded-md bg-primary gap-x-1.5 py-2 px-3 text-sm font-semibold text-white hover:bg-primary-hover focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70',
     className
   )
 
