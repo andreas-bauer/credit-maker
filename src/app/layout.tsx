@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang='en' className='h-full bg-white antialiased'>
       <body className={inter.className + 'h-full bg-white'}>
         <Header />
-        <BackgroundImage position='right' className='-bottom-32 -top-40' />
+        <BackgroundImage position='right' className='-top-40 -bottom-32' />
         {children}
         <Footer />
       </body>
