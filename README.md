@@ -7,8 +7,9 @@ To learn more about CRediT, visit the [CRediT website](https://credit.niso.org/)
 
 <p align="center"><img src="screenshot.png"></p>
 
-Link to hosted version:
-[https://andreas-bauer.github.io/credit-maker/](https://andreas-bauer.github.io/credit-maker/)
+> [!TIP]
+> Link to hosted version:
+> [https://andreas-bauer.github.io/credit-maker/](https://andreas-bauer.github.io/credit-maker/)
 
 ## Getting Started
 
