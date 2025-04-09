@@ -11,7 +11,7 @@ To learn more about CRediT, visit the [CRediT website](https://credit.niso.org/)
 > Link to hosted version:
 > [https://andreas-bauer.github.io/credit-maker/](https://andreas-bauer.github.io/credit-maker/)
 
-## Getting Started
+## Getting started
 
 First, install the dependencies:
 
@@ -26,6 +26,11 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## How to add new output formats
+
+All generator functions are located in `./src/lib/credit/` and follow the type defined in `./src/lib/credit/generator.ts`.
+New output format generators need to be listed in `./src/app/page.tsx` within the `availableStyles` object along with a short description.
 
 ## License
 
