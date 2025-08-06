@@ -32,6 +32,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 All generator functions are located in `./src/lib/credit/` and follow the type defined in `./src/lib/credit/generator.ts`.
 New output format generators need to be listed in `./src/app/page.tsx` within the `availableStyles` object along with a short description.
 
+## Build in Docker container
+
+You can create the build of the static page inside a Docker container by running:
+
+```sh
+docker run --rm -v "$PWD":/app -w /app node:24-alpine sh -c "npm ci --ignore-engines && npm run build"
+```
+
 ## License
 
 Copyright © 2024-2025 Andreas Bauer
