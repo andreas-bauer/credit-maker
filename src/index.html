@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpine + Tailwind + Vite</title>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <main
+      class="mx-auto flex min-h-screen max-w-4xl flex-col items-start justify-center gap-6 px-6 py-16"
+    >
+      <p class="text-sm uppercase tracking-[0.3em] text-[#c06d3c]">
+        Alpine + Tailwind + Vite
+      </p>
+      <h1 class="text-4xl font-semibold leading-tight sm:text-5xl">
+        A clean starter for Alpine.js + Tailwind CSS + Vite.
+      </h1>
+      <p class="max-w-xl text-lg text-[#4c3023]">
+        Open
+        <code class="rounded bg-white/70 px-2 py-1 text-base">src/main.js</code>
+        and start building. This setup already includes Tailwind, Alpine, and
+        Vite with hot reload.
+      </p>
+      <div x-data="{ count: 0 }" class="flex items-center gap-4">
+        <button
+          class="rounded border border-[#c06d3c] px-5 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#c06d3c] transition hover:bg-[#c06d3c] hover:text-white"
+          @click="count++"
+        >
+          Count
+        </button>
+        <span class="text-lg font-medium"
+          >Clicked <span x-text="count"></span> times</span
+        >
+      </div>
+      <p class="text-sm uppercase tracking-[0.3em] text-[#c06d3c]">
+        Credit-Maker
+      </p>
+    </main>
+  </body>
+</html>

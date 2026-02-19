@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family:
+    "Newsreader", "Iowan Old Style", "Apple Garamond", "Palatino",
+    "Times New Roman", serif;
+  background: radial-gradient(
+    circle at top,
+    #fff1e6 0%,
+    #f9efe3 45%,
+    #f2e2d1 100%
+  );
+  color: #2b1d12;
+  min-height: 100vh;
+}
