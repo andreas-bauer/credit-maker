@@ -26,6 +26,57 @@
     </script>
   </head>
   <body>
+    <header class="relative z-50 flex-none pt-4">
+      <div class="mx-auto flex max-w-7xl items-center justify-center px-8">
+        <div class="hidden grow basis-0 sm:flex">
+          <image
+            src="{logo}"
+            alt="logo"
+            width="{64}"
+            height="{64}"
+            unoptimized
+          />
+        </div>
+
+        <div class="mx-auto flex items-center border-b border-blue-600/10">
+          <p class="text-2xl text-blue-600">CRediT Maker</p>
+        </div>
+
+        <div class="hidden grow basis-0 justify-end gap-x-5 sm:flex">
+          <a
+            href="https://credit.niso.org/"
+            target="_blank"
+            class="hidden items-center gap-x-1.5 font-medium text-blue-600 hover:underline md:inline-flex dark:text-blue-500"
+          >
+            more about CRediT
+          </a>
+          <a
+            href="https://github.com/andreas-bauer/credit-maker"
+            target="_blank"
+            class="inline-flex items-center gap-x-1.5 font-medium text-blue-600 hover:underline dark:text-blue-500"
+          >
+            GitHub
+            <svg
+              class="-ml-0.5 h-5 w-5"
+              data-slot="icon"
+              fill="none"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
     <main
       class="flex min-h-screen flex-col items-center justify-between bg-white p-4"
       x-data="{ output: ''}"
@@ -195,6 +246,17 @@
         </div>
       </div>
     </main>
+    <footer className="flex-none bg-white py-2">
+      <div className="flex items-center justify-end">
+        <p
+          className="text-gray-light z-40 mr-4 text-base"
+          x-data="{ currentYear: new Date().getFullYear()}"
+        >
+          Copyright &copy; <span x-text="currentYear"></span> Andreas Bauer. All
+          rights reserved.
+        </p>
+      </div>
+    </footer>
     <!-- <main -->
     <!--   class="mx-auto flex min-h-screen max-w-4xl flex-col items-start justify-center gap-6 px-6 py-16" -->
     <!-- > -->
