@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Credit Maker</title>
     <script type="module" src="./main.js"></script>
-    <script src="./credit.js"></script>
+    <script src="./credit/credit.js"></script>
+    <script src="./credit/generator.js"></script>
+    <script>
+      function prepareContributors(contributors) {
+        result = []
+        activeContributors = contributors.filter((c) => c.name != '')
+        activeContributors.forEach((c) => {
+          activeRoles = Object.keys(c.role)
+            .filter((k) => c.role[k] === true)
+            .map((k) => allCreditRoles[k].name)
+
+          result.push({
+            name: c.name,
+            role: activeRoles,
+          })
+        })
+        return result
+      }
+    </script>
   </head>
   <body>
     <main
       class="flex min-h-screen flex-col items-center justify-between bg-white p-4"
+      x-data="{ output: ''}"
     >
       <div class="w-fullconst z-10 flex flex-row gap-4">
         <!-- Left side -->
@@ -37,8 +56,8 @@
                 ]
               }"
               @change="
-              console.log('change');
-              console.log(contributors);
+              prepared = prepareContributors(contributors)
+              output = toPlainText(prepared)
               "
             >
               <fieldset aria-label="Names of contributors">
@@ -171,9 +190,10 @@
           </div>
           <div class="px-4 py-5">
             <!-- Content goes here -->
-            <pre class="text-gray-dark font-mono text-xl text-wrap">
-              {outputText}
-            </pre>
+            <pre
+              class="text-gray-dark font-mono text-xl text-wrap"
+              x-text="output"
+            ></pre>
           </div>
         </div>
       </div>
