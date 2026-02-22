@@ -53,11 +53,19 @@
                 createContributor(),
                 createContributor(),
                 createContributor(),
-                ]
+                ],
+                generatorStyles: [
+                  { id: 'plain', description: 'Plain text'}, 
+                  { id: 'plainWithDegree', description: 'Plain text with degree options'},
+                  { id: 'latexItemize', description: 'LaTeX itemize'},
+                  { id: 'latexText', description: 'LaTeX text'}
+                ],
+                selectedStyle: 'plain'
               }"
               @change="
+              console.log(selectedStyle)
               prepared = prepareContributors(contributors)
-              output = toPlainText(prepared)
+              output = generateOutput(selectedStyle, prepared) 
               "
             >
               <fieldset aria-label="Names of contributors">
@@ -70,15 +78,12 @@
                   <select
                     id="generator-style"
                     name="generator style"
-                    onChange=""
+                    x-model="selectedStyle"
                     class="text-gray-dark col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
                   >
-                    <option key="plain">Plain text</option>
-                    <option key="plainDegree">
-                      Plain text with degree options
-                    </option>
-                    <option key="latexItemize">LaTeX itemize</option>
-                    <option key="latexText">LaTeX text</option>
+                    <template x-for="s in generatorStyles">
+                      <option :value="s.id" x-text="s.description"></option>
+                    </template>
                   </select>
                   <svg
                     viewBox="0 0 16 16"
@@ -168,25 +173,17 @@
 
         <!-- Right side -->
         <div
-          class="w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-white/70 shadow-sm"
+          class="w-1/2 divide-y divide-gray-200 max-w-1/2 overflow-hidden rounded-md bg-white/70 shadow-sm"
         >
           <div class="flex flex-wrap items-center justify-between gap-4 p-4">
-            Card header
-
-            <!-- <SecondaryButton -->
-            <!--   type='submit' -->
-            <!--   class='w-full lg:w-24' -->
-            <!--   tabIndex={22} -->
-            <!--   onClick={onCopyHandler} -->
-            <!-- > -->
-            <!--   <CheckIcon -->
-            <!--     class={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? '' : 'hidden'}`} -->
-            <!--   /> -->
-            <!--   <ClipboardIcon -->
-            <!--     class={`-ml-0.5 h-5 w-5 ${showSuccessCopy ? 'hidden' : ''}`} -->
-            <!--   /> -->
-            <!--   <span class=''>{showSuccessCopy ? 'Copied!' : 'Copy'}</span> -->
-            <!-- </SecondaryButton> -->
+            <p class="text-gray-dark text-xl">Generated CRrediT Statement</p>
+            <button
+              type="button"
+              class="uppercase inline-flex justify-center items-center rounded-md bg-white gap-x-1.5 py-2 px-3 text-sm font-semibold text-gray-dark hover:bg-gray-100 focus:outline-hidden ring-1 ring-inset ring-gray-300 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
+              @click="navigator.clipboard.writeText(output)"
+            >
+              Copy to clipboard
+            </button>
           </div>
           <div class="px-4 py-5">
             <!-- Content goes here -->
