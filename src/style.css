@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap');
+@import 'tailwindcss';
 
 @tailwind base;
 @tailwind components;
@@ -10,6 +10,18 @@
 }
 
 @theme {
+  --color-mist-50: oklch(98.7% 0.002 197.1);
+  --color-mist-100: oklch(96.3% 0.002 197.1);
+  --color-mist-200: oklch(92.5% 0.005 214.3);
+  --color-mist-300: oklch(87.2% 0.007 219.6);
+  --color-mist-400: oklch(72.3% 0.014 214.4);
+  --color-mist-500: oklch(56% 0.021 213.5);
+  --color-mist-600: oklch(45% 0.017 213.2);
+  --color-mist-700: oklch(37.8% 0.015 216);
+  --color-mist-800: oklch(27.5% 0.011 216.9);
+  --color-mist-900: oklch(21.8% 0.008 223.9);
+  --color-mist-950: oklch(14.8% 0.004 228.8);
+
   --color-primary: #c06d3c;
   --color-gray-light: #6b7280;
   --color-gray-dark: #111827;
@@ -17,13 +29,15 @@
 
 body {
   font-family:
-    "Familjen Grotesk", "Iowan Old Style", "Times New Roman", sans-serif;
-  /* background: radial-gradient( */
-  /*   circle at top, */
-  /*   #fff1e6 0%, */
-  /*   #f9efe3 45%, */
-  /*   #f2e2d1 100% */
-  /* ); */
-  color: #2b1d12;
-  min-height: 100vh;
+    'Familjen Grotesk', 'Iowan Old Style', 'Times New Roman', sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-mist-200);
+    --scroll-padding-top: 0;
+    scroll-padding-top: var(--scroll-padding-top);
+  }
 }
