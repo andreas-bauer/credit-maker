@@ -9,15 +9,21 @@
   color-scheme: light;
 }
 
+@theme {
+  --color-primary: #c06d3c;
+  --color-gray-light: #6b7280;
+  --color-gray-dark: #111827;
+}
+
 body {
   font-family:
     "Familjen Grotesk", "Iowan Old Style", "Times New Roman", sans-serif;
-  background: radial-gradient(
-    circle at top,
-    #fff1e6 0%,
-    #f9efe3 45%,
-    #f2e2d1 100%
-  );
+  /* background: radial-gradient( */
+  /*   circle at top, */
+  /*   #fff1e6 0%, */
+  /*   #f9efe3 45%, */
+  /*   #f2e2d1 100% */
+  /* ); */
   color: #2b1d12;
   min-height: 100vh;
 }
