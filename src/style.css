@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap");
 @import "tailwindcss";
 
 @tailwind base;
@@ -10,8 +11,7 @@
 
 body {
   font-family:
-    "Newsreader", "Iowan Old Style", "Apple Garamond", "Palatino",
-    "Times New Roman", serif;
+    "Familjen Grotesk", "Iowan Old Style", "Times New Roman", sans-serif;
   background: radial-gradient(
     circle at top,
     #fff1e6 0%,
