@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "oxfmt": "^0.34.0",
-    "tailwindcss": "^4.2.0",
+    "tailwindcss": "^4.2.1",
     "vite": "^7.3.1"
   }
 }
