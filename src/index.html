@@ -38,7 +38,7 @@
           />
         </div>
 
-        <h1 class="text-3xl font-semibold leading-tight sm:text-5xl">
+        <h1 class="text-3xl leading-tight font-semibold sm:text-5xl">
           CRediT Maker
         </h1>
 
@@ -124,10 +124,10 @@
               <fieldset aria-label="Names of contributors">
                 <label
                   for="generator-style"
-                  class="block text-sm/6 font-semibold text-gray-dark"
+                  class="text-gray-dark block text-sm/6 font-semibold"
                   >Output style</label
                 >
-                <div class="grid mt-2 w-full grid-cols-1 lg:grow">
+                <div class="mt-2 grid w-full grid-cols-1 lg:grow">
                   <select
                     id="generator-style"
                     name="generator style"
@@ -155,7 +155,7 @@
               </fieldset>
               <fieldset aria-label="Names of contributors">
                 <div>
-                  <label class="block text-sm/6 font-semibold text-gray-dark"
+                  <label class="text-gray-dark block text-sm/6 font-semibold"
                     >Contributor names</label
                   >
                   <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
@@ -226,7 +226,7 @@
 
         <!-- Right side -->
         <div
-          class="w-1/2 divide-y divide-gray-200 max-w-1/2 overflow-hidden rounded-md bg-mist-100 shadow-sm"
+          class="w-1/2 max-w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md bg-mist-100 shadow-sm"
         >
           <div class="flex flex-wrap items-center justify-between gap-4 p-4">
             <p class="text-gray-dark text-xl uppercase">
@@ -234,7 +234,7 @@
             </p>
             <button
               type="button"
-              class="uppercase inline-flex justify-center items-center rounded-md bg-mist-100 gap-x-1.5 py-2 px-3 text-sm font-semibold text-gray-dark hover:bg-gray-100 focus:outline-hidden ring-1 ring-inset ring-gray-300 shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
+              class="text-gray-dark inline-flex items-center justify-center gap-x-1.5 rounded-md bg-mist-100 px-3 py-2 text-sm font-semibold uppercase shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-100 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
               @click="navigator.clipboard.writeText(output)"
             >
               Copy to clipboard

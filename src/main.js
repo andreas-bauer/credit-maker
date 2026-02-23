@@ -1,5 +1,5 @@
-import "./style.css";
-import Alpine from "alpinejs";
+import './style.css'
+import Alpine from 'alpinejs'
 
-window.alpine = Alpine;
-Alpine.start();
+window.alpine = Alpine
+Alpine.start()
