@@ -19,7 +19,7 @@
  * )} Credit
  */
 
-function createContributor() {
+export function createContributor() {
   return {
     name: '',
     role: {
@@ -41,7 +41,7 @@ function createContributor() {
   }
 }
 
-const allCreditRoles = {
+export const allCreditRoles = {
   conceptualization: {
     name: 'Conceptualization',
     definition:

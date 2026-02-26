@@ -1,6 +1,6 @@
 const degreeOfContribution = ' (lead|equal|supporting)'
 
-function generateOutput(style, contributors) {
+export default function generateOutput(style, contributors) {
   switch (style) {
     case 'plain':
       return toPlainText(contributors)
