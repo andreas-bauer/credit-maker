@@ -37,7 +37,7 @@ New output format generators need to be listed in `./src/app/page.tsx` within th
 You can create the build of the static page inside a Docker container by running:
 
 ```sh
-docker run --rm -v "$PWD":/app -w /app node:24-alpine sh -c "npm ci --ignore-engines && npm run build"
+make docker
 ```
 
 ## License
