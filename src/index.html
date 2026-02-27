@@ -130,7 +130,7 @@
                     id="generator-style"
                     name="generator style"
                     x-model="selectedStyle"
-                    class="text-gray-dark col-start-1 row-start-1 w-full appearance-none rounded-md bg-mist-100 py-1.5 pr-8 pl-3 text-base outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+                    class="text-gray-dark col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
                   >
                     <template x-for="s in generatorStyles">
                       <option :value="s.id" x-text="s.description"></option>
@@ -167,7 +167,7 @@
                         <input
                           type="text"
                           x-model="contributors[i].name"
-                          class="text-gray-dark focus:ring-primary block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 px-3 py-1.5 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                          class="text-gray-dark focus:ring-primary block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 bg-white px-3 py-1.5 ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
                         />
                       </div>
                     </template>
@@ -232,7 +232,7 @@
             </p>
             <button
               type="button"
-              class="text-gray-dark inline-flex items-center justify-center gap-x-1.5 rounded-md bg-mist-100 px-3 py-2 text-sm font-semibold uppercase shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-100 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
+              class="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-mist-900 px-3 py-2 text-sm font-semibold text-white uppercase shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-mist-700 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
               @click="navigator.clipboard.writeText(output)"
             >
               Copy to clipboard
