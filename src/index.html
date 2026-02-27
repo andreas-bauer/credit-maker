@@ -99,13 +99,12 @@
               class="space-y-4"
               x-data="{
                 contributors: [
-                createContributor(),
-                createContributor(),
-                createContributor(),
-                createContributor(),
-                createContributor(),
-                createContributor(),
+                  createContributor(),
+                  createContributor(),
+                  createContributor(),
+                  createContributor(),
                 ],
+                addContributor() {this.contributors.push(createContributor())},
                 generatorStyles: [
                   { id: 'plain', description: 'Plain text'}, 
                   { id: 'plainWithDegree', description: 'Plain text with degree options'},
@@ -115,7 +114,6 @@
                 selectedStyle: 'plain'
               }"
               @change="
-              console.log(selectedStyle)
               prepared = prepareContributors(contributors)
               output = generateOutput(selectedStyle, prepared) 
               "
@@ -161,7 +159,7 @@
                     <template x-for="(contributor, i) in contributors">
                       <div class="mt-2 flex rounded-md shadow-xs">
                         <span
-                          class="text-gray-light inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 sm:text-sm"
+                          class="text-gray-light inline-flex w-8 items-center justify-center rounded-l-md border border-r-0 border-gray-300 sm:text-sm"
                           x-text="i + 1"
                         >
                         </span>
@@ -174,6 +172,30 @@
                     </template>
                   </div>
                 </div>
+              </fieldset>
+              <fieldset>
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center gap-x-1.5 rounded-md bg-mist-900 px-3 py-2 text-sm font-semibold text-white uppercase shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-mist-700 focus:outline-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:text-white/70"
+                  x-on:click.prevent="addContributor()"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    data-slot="icon"
+                    aria-hidden="true"
+                    class="-ml-0.5 size-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    ></path>
+                  </svg>
+                  Add contributor
+                </button>
               </fieldset>
 
               <fieldset>
