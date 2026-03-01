@@ -1,4 +1,4 @@
-name: Build and deploy Next.js
+name: Build
 
 on:
   push:
@@ -25,10 +25,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
+
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -40,26 +45,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Lint
-        run: npx --no-install next lint
+        run: npm ci
 
       - name: Format
-        run: npm run format
+        run: npm run fmt:check
 
-      - name: Build with Next.js
-        run: npx --no-install next build
-        env:
-          NEXT_BASE_PATH: /${{ github.event.repository.name }}
+      - name: Build
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: dist
 
   deploy:
-    if: "contains(github.ref, 'main')"
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

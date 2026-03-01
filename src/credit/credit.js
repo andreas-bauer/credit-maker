@@ -1,41 +1,47 @@
-const ALL_CREDITS = [
-  'conceptualization',
-  'dataCuration',
-  'formalanAlysis',
-  'funding',
-  'investigation',
-  'methodology',
-  'projectManagement',
-  'resource',
-  'software',
-  'supervision',
-  'validation',
-  'visualization',
-  'writing',
-  'writingReview',
-] as const
+/**
+ * All supported CRediT role keys used in this map.
+ * (Keep in sync with the object keys below.)
+ * @typedef {(
+ *   "conceptualization"
+ *   | "dataCuration"
+ *   | "formalanAlysis"
+ *   | "funding"
+ *   | "investigation"
+ *   | "methodology"
+ *   | "projectManagement"
+ *   | "resource"
+ *   | "software"
+ *   | "supervision"
+ *   | "validation"
+ *   | "visualization"
+ *   | "writing"
+ *   | "writingReview"
+ * )} Credit
+ */
 
-export type Credit = (typeof ALL_CREDITS)[number]
-
-export function isCredit(value: string): value is Credit {
-  return ALL_CREDITS.includes(value as Credit)
+export function createContributor() {
+  return {
+    name: '',
+    role: {
+      conceptualization: false,
+      dataCuration: false,
+      formalanAlysis: false,
+      funding: false,
+      investigation: false,
+      methodology: false,
+      projectManagement: false,
+      resource: false,
+      software: false,
+      supervision: false,
+      validation: false,
+      visualization: false,
+      writing: false,
+      writingReview: false,
+    },
+  }
 }
 
-export interface Contributor {
-  name: string
-  credits: Credit[]
-}
-
-export interface Contributors {
-  [key: string]: Contributor
-}
-
-export interface CreditRole {
-  name: string
-  definition: string
-}
-
-export const allCreditRoles: Record<Credit, CreditRole> = {
+export const allCreditRoles = {
   conceptualization: {
     name: 'Conceptualization',
     definition:

@@ -25,23 +25,25 @@ After that, run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:5173/](http://localhost:3000) with your browser to use it.
 
 ## How to add new output formats
 
-All generator functions are located in `./src/lib/credit/` and follow the type defined in `./src/lib/credit/generator.ts`.
-New output format generators need to be listed in `./src/app/page.tsx` within the `availableStyles` object along with a short description.
+Have a look at `./src/credit/generator.js` and add your new generator function that creates a new output format.
+Then handle the new generator function in the `generateOutput()` function and within the `generatorStyles` object in the `./src/index.html`.
 
 ## Build in Docker container
 
 You can create the build of the static page inside a Docker container by running:
 
 ```sh
-docker run --rm -v "$PWD":/app -w /app node:24-alpine sh -c "npm ci --ignore-engines && npm run build"
+make docker
 ```
+
+The generated files will be placed in the `dist/` folder.
 
 ## License
 
-Copyright © 2024-2025 Andreas Bauer
+Copyright © 2024-2026 Andreas Bauer
 
 This work (source code) is licensed under [MIT](./LICENSE).

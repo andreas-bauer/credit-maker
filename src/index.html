@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Maker</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <script type="module" src="./main.js"></script>
+    <script>
+      function prepareContributors(contributors) {
+        result = []
+        activeContributors = contributors.filter((c) => c.name != '')
+        activeContributors.forEach((c) => {
+          activeRoles = Object.keys(c.role)
+            .filter((k) => c.role[k] === true)
+            .map((k) => allCreditRoles[k].name)
+
+          result.push({
+            name: c.name,
+            role: activeRoles,
+          })
+        })
+        return result
+      }
+    </script>
+  </head>
+  <body>
+    <header class="relative z-50 flex-none pt-4">
+      <div class="mx-auto flex max-w-7xl items-center justify-center px-8">
+        <div class="hidden grow basis-0 sm:flex">
+          <image
+            src="./images/robot-logo128.png"
+            alt="logo"
+            width="64"
+            height="64"
+            unoptimized
+          />
+        </div>
+
+        <h1 class="text-3xl leading-tight font-semibold sm:text-5xl">
+          CRediT Maker
+        </h1>
+
+        <div class="hidden grow basis-0 justify-end gap-x-5 sm:flex">
+          <a
+            href="https://credit.niso.org/"
+            target="_blank"
+            class="hidden items-center gap-x-1.5 font-medium hover:underline md:inline-flex"
+          >
+            more about CRediT
+          </a>
+          <a
+            href="https://github.com/andreas-bauer/credit-maker"
+            target="_blank"
+            class="inline-flex items-center gap-x-1.5 font-medium hover:underline"
+          >
+            GitHub
+            <svg
+              class="-ml-0.5 h-5 w-5"
+              data-slot="icon"
+              fill="none"
+              stroke-width="1.5"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="flex min-h-screen flex-col items-center justify-between p-4"
+      x-data="{ 
+        output: '',
+        showSuccessCopy: false,
+        copyToClipboard () {
+          navigator.clipboard.writeText(this.output)
+          this.showSuccessCopy = true
+            setTimeout(() => {
+              this.showSuccessCopy = false
+            }, 2000)
+        },
+      }"
+    >
+      <div class="w-fullconst z-10 flex flex-row gap-4">
+        <!-- Left side -->
+        <div
+          class="bg-card text-card-foreground w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md shadow-sm"
+        >
+          <div class="flex-wggrap flex items-center justify-between px-4 py-5">
+            <!-- Card header -->
+            <p class="text-xl uppercase">Contributor information</p>
+          </div>
+          <div class="p-5">
+            <!--  Content goes here  -->
+            <form
+              id="contributor-form"
+              ref="{contributorFormRef}"
+              class="space-y-4"
+              x-data="{
+                contributors: [
+                  createContributor(),
+                  createContributor(),
+                  createContributor(),
+                  createContributor(),
+                ],
+                addContributor() {this.contributors.push(createContributor())},
+                generatorStyles: [
+                  { id: 'plain', description: 'Plain text'}, 
+                  { id: 'plainWithDegree', description: 'Plain text with degree options'},
+                  { id: 'latexItemize', description: 'LaTeX itemize'},
+                  { id: 'latexText', description: 'LaTeX text'}
+                ],
+                selectedStyle: 'plain'
+              }"
+              @change="
+              prepared = prepareContributors(contributors)
+              output = generateOutput(selectedStyle, prepared) 
+              "
+            >
+              <fieldset aria-label="Names of contributors">
+                <label
+                  for="generator-style"
+                  class="block text-sm/6 font-semibold"
+                  >Output style</label
+                >
+                <div class="mt-2 grid w-full grid-cols-1 lg:grow">
+                  <select
+                    id="generator-style"
+                    name="generator style"
+                    x-model="selectedStyle"
+                    class="bg-background focus-visible:ring-ring border-input hover:bg-accent hover:text-accent-foreground col-start-1 row-start-1 w-full appearance-none rounded-md border-2 py-1.5 pr-8 pl-3 text-base sm:text-sm/6"
+                  >
+                    <template x-for="s in generatorStyles">
+                      <option :value="s.id" x-text="s.description"></option>
+                    </template>
+                  </select>
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    data-slot="icon"
+                    aria-hidden="true"
+                    class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
+                  >
+                    <path
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </fieldset>
+              <fieldset aria-label="Names of contributors">
+                <div>
+                  <label class="block text-sm/6 font-semibold"
+                    >Contributor names</label
+                  >
+                  <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                    <template x-for="(contributor, i) in contributors">
+                      <div class="mt-2 flex rounded-md shadow-xs">
+                        <span
+                          class="text-muted-foreground border-input bg-input/20 inline-flex w-8 items-center justify-center rounded-l-md border-2 border-r-0"
+                          x-text="i + 1"
+                        >
+                        </span>
+                        <input
+                          type="text"
+                          x-model="contributors[i].name"
+                          class="border-input placeholder:text-muted-foreground focus-visible:ring-ring block w-full min-w-0 flex-1 rounded-r-md border-2 px-3 py-1.5 sm:leading-6"
+                        />
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <button
+                  type="button"
+                  class="hover:bg-primary/90 focus-visible:ring-ring bg-primary text-primary-foreground inline-flex w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold uppercase shadow-xs ring-inset md:w-auto"
+                  x-on:click.prevent="addContributor()"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    data-slot="icon"
+                    aria-hidden="true"
+                    class="-ml-0.5 size-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    ></path>
+                  </svg>
+                  Add contributor
+                </button>
+              </fieldset>
+
+              <fieldset>
+                <legend class="sr-only">Credit roles</legend>
+                <div class="flex items-start space-x-2">
+                  <template x-for="(_, i) in contributors">
+                    <p
+                      class="v-4 text-muted-foreground w-4 text-center"
+                      x-text="i+1"
+                    />
+                  </template>
+                </div>
+                <div class="space-y-3">
+                  <template x-for="(role, key) in allCreditRoles">
+                    <div class="relative flex items-start">
+                      <div class="flex h-6 items-center space-x-2">
+                        <template x-for="(_, i) in contributors">
+                          <input
+                            type="checkbox"
+                            x-model="contributors[i].role[key]"
+                            aria-describedby="credit attribution per author checkbox"
+                            class="h-4 w-4 cursor-pointer items-center rounded-sm"
+                          />
+                        </template>
+                      </div>
+
+                      <div
+                        class="ml-3 text-sm leading-6"
+                        x-data="{ id: $id('ckb-role') }"
+                      >
+                        <label
+                          :htmlFor="id"
+                          class="font-semibold"
+                          x-text="role.name"
+                        ></label>
+                        <p
+                          :id="id"
+                          class="text-muted-foreground text-wrap"
+                          x-text="role.definition"
+                        ></p>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div
+          class="bg-card text-card-foreground w-1/2 max-w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md shadow-sm"
+        >
+          <div class="flex flex-wrap items-center justify-between gap-4 p-4">
+            <p class="text-xl uppercase">Generated CRrediT Statement</p>
+            <button
+              type="button"
+              class="hover:bg-primary/90 focus-visible:ring-ring bg-primary text-primary-foreground inline-flex w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold uppercase shadow-xs ring-inset md:w-auto"
+              @click="copyToClipboard()"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                fill="none"
+                data-slot="icon"
+                aria-hidden="true"
+                class="-ml-0.5 size-5"
+                x-show="!showSuccessCopy"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"
+                ></path>
+              </svg>
+              <svg
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                fill="none"
+                data-slot="icon"
+                aria-hidden="true"
+                class="-ml-0.5 size-5"
+                x-show="showSuccessCopy"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m4.5 12.75 6 6 9-13.5"
+                ></path>
+              </svg>
+              Copy to clipboard
+            </button>
+          </div>
+          <div class="px-4 py-5">
+            <!-- Content goes here -->
+            <pre class="font-mono text-xl text-wrap" x-text="output"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="relative z-50 flex-none pt-4">
+      <div class="mx-auto flex max-w-7xl items-center justify-center px-8">
+        <p
+          className="text-muted-foreground z-40 mr-4 text-base"
+          x-data="{ currentYear: new Date().getFullYear()}"
+        >
+          Copyright &copy; <span x-text="currentYear"></span> Andreas Bauer. All
+          rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
