@@ -1,4 +1,4 @@
-name: Build
+name: Build and Deploy
 
 on:
   push:
@@ -52,11 +52,13 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./dist/
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
