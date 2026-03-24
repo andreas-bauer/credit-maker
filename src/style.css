@@ -5,6 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme was taken from https://tweakcn.com/ 
+ * You can copy-paste any another theme from this page to override the current one.
+ * */
 @custom-variant dark (&:is(.dark *));
 
 :root {
