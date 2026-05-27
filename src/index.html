@@ -8,10 +8,10 @@
     <script type="module" src="./main.js"></script>
     <script>
       function prepareContributors(contributors) {
-        result = []
-        activeContributors = contributors.filter((c) => c.name != '')
+        const result = []
+        const activeContributors = contributors.filter((c) => c.name != '')
         activeContributors.forEach((c) => {
-          activeRoles = Object.keys(c.role)
+          const activeRoles = Object.keys(c.role)
             .filter((k) => c.role[k] === true)
             .map((k) => allCreditRoles[k].name)
 
@@ -120,10 +120,7 @@
                 ],
                 selectedStyle: 'plain'
               }"
-              @change="
-              prepared = prepareContributors(contributors)
-              output = generateOutput(selectedStyle, prepared) 
-              "
+              @change="output = generateOutput(selectedStyle, prepareContributors(contributors))"
             >
               <fieldset aria-label="Names of contributors">
                 <label
