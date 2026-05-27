@@ -11,7 +11,7 @@ export default function generateOutput(style, contributors) {
     case 'latexItemize':
       return toLatexItemize(contributors)
     default:
-      return 'Error: Unkown generator style'
+      return 'Error: Unknown generator style'
   }
 }
 

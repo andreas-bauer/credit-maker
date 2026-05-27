@@ -28,12 +28,11 @@
     <header class="relative z-50 flex-none pt-4">
       <div class="mx-auto flex max-w-7xl items-center justify-center px-8">
         <div class="hidden grow basis-0 sm:flex">
-          <image
+          <img
             src="./images/robot-logo128.png"
             alt="logo"
             width="64"
             height="64"
-            unoptimized
           />
         </div>
 
@@ -90,7 +89,7 @@
         },
       }"
     >
-      <div class="w-fullconst z-10 flex flex-row gap-4">
+      <div class="z-10 flex w-full flex-row gap-4">
         <!-- Left side -->
         <div
           class="bg-card text-card-foreground w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md shadow-sm"
@@ -224,7 +223,6 @@
                           <input
                             type="checkbox"
                             x-model="contributors[i].role[key]"
-                            aria-describedby="credit attribution per author checkbox"
                             class="h-4 w-4 cursor-pointer items-center rounded-sm"
                           />
                         </template>
@@ -235,7 +233,7 @@
                         x-data="{ id: $id('ckb-role') }"
                       >
                         <label
-                          :htmlFor="id"
+                          :for="id"
                           class="font-semibold"
                           x-text="role.name"
                         ></label>
@@ -258,7 +256,7 @@
           class="bg-card text-card-foreground w-1/2 max-w-1/2 divide-y divide-gray-200 overflow-hidden rounded-md shadow-sm"
         >
           <div class="flex flex-wrap items-center justify-between gap-4 p-4">
-            <p class="text-xl uppercase">Generated CRrediT Statement</p>
+            <p class="text-xl uppercase">Generated CRediT Statement</p>
             <button
               type="button"
               class="hover:bg-primary/90 focus-visible:ring-ring bg-primary text-primary-foreground inline-flex w-full items-center justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold uppercase shadow-xs ring-inset md:w-auto"
@@ -310,7 +308,7 @@
     <footer class="relative z-50 flex-none pt-4">
       <div class="mx-auto flex max-w-7xl items-center justify-center px-8">
         <p
-          className="text-muted-foreground z-40 mr-4 text-base"
+          class="text-muted-foreground z-40 mr-4 text-base"
           x-data="{ currentYear: new Date().getFullYear()}"
         >
           Copyright &copy; <span x-text="currentYear"></span> Andreas Bauer. All
