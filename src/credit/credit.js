@@ -1,43 +1,9 @@
-/**
- * All supported CRediT role keys used in this map.
- * (Keep in sync with the object keys below.)
- * @typedef {(
- *   "conceptualization"
- *   | "dataCuration"
- *   | "formalanAlysis"
- *   | "funding"
- *   | "investigation"
- *   | "methodology"
- *   | "projectManagement"
- *   | "resource"
- *   | "software"
- *   | "supervision"
- *   | "validation"
- *   | "visualization"
- *   | "writing"
- *   | "writingReview"
- * )} Credit
- */
-
 export function createContributor() {
   return {
     name: '',
-    role: {
-      conceptualization: false,
-      dataCuration: false,
-      formalanAlysis: false,
-      funding: false,
-      investigation: false,
-      methodology: false,
-      projectManagement: false,
-      resource: false,
-      software: false,
-      supervision: false,
-      validation: false,
-      visualization: false,
-      writing: false,
-      writingReview: false,
-    },
+    role: Object.fromEntries(
+      Object.keys(allCreditRoles).map((role) => [role, false])
+    ),
   }
 }
 
@@ -52,7 +18,7 @@ export const allCreditRoles = {
     definition:
       'Produce metadata, scrub data and maintain research data for initial use and later re-use.',
   },
-  formalanAlysis: {
+  formalAnalysis: {
     name: 'Formal analysis',
     definition:
       'Application of statistical, mathematical, computational, or other formal techniques to analyze data.',
