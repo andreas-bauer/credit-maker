@@ -12,6 +12,7 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
+    "test": "node --test",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check"
   },
