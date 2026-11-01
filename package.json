@@ -17,13 +17,13 @@
     "fmt:check": "oxfmt --check"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.1",
-    "alpinejs": "^3.16.1"
+    "@tailwindcss/vite": "^4.3.3",
+    "alpinejs": "^3.17.5"
   },
   "devDependencies": {
-    "oxfmt": "^0.63.0",
-    "tailwindcss": "^4.3.1",
-    "vite": "^8.2.1"
+    "oxfmt": "^0.75.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.5"
   },
   "allowScripts": {
     "fsevents@2.3.3": true
